@@ -156,34 +156,7 @@ namespace Resonance.Demo
                 .AddDebug(LogLevel.Trace);
             serviceCollection.AddSingleton<ILoggerFactory>(loggerFactory);
 
-
-            ConfigureRepoServices(serviceCollection, config); // Using the db-repo's doesn't have any api/web dependencies
-            //ConfigureApiServices(serviceCollection, config); // When using the ApiClient, make sure Resonance.Web is also running
-        }
-
-        private static void ConfigureRepoServices(IServiceCollection serviceCollection, IConfiguration config)
-        {
-            // Configure IEventingRepoFactory dependency (reason: the repo that must be used in this app)
-            var maxRetriesOnDeadlock = int.Parse(config["Resonance:Repo:Database:MaxRetriesOnDeadlock"]);
-            var commandTimeout = TimeSpan.FromSeconds(int.Parse(config["Resonance:Repo:Database:CommandTimeout"]));
-            
-            // To use MSSQLServer:
-            //var connectionString = config.GetConnectionString("Resonance.MsSql");
-            //serviceCollection.AddTransient<IEventingRepoFactory>((p) =>
-            //{
-            //    return new MsSqlEventingRepoFactory(connectionString, commandTimeout); // Does not (yet) support MaxRetriesOnDeadlock
-            //});
-
-            // To use MySQL:
-            var connectionString = config.GetConnectionString("Resonance.MySql");
-            serviceCollection.AddTransient<IEventingRepoFactory>((p) =>
-            {
-                return new MySqlEventingRepoFactory(connectionString, commandTimeout, maxRetriesOnDeadlock);
-            });
-
-            // Configure EventPublisher and Consumer (their constructors require the above registered IEventingRepoFactory).
-            serviceCollection.AddTransient<IEventPublisherAsync, EventPublisher>();
-            serviceCollection.AddTransient<IEventConsumerAsync, EventConsumer>();
+            ConfigureApiServices(serviceCollection, config); // When using the ApiClient, make sure Resonance.Web is also running
         }
 
         private static void ConfigureApiServices(IServiceCollection serviceCollection, IConfiguration config)

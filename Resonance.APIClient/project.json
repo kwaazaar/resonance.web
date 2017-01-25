@@ -6,7 +6,7 @@
   },
 
   "dependencies": {
-    "Resonance.Core": "0.*"
+    "Resonance.Core": "0.6.9"
   },
 
   "frameworks": {
