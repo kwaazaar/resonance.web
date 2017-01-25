@@ -9,15 +9,15 @@ before_build:
 - cmd: dotnet restore
 before_test:
 - cmd: |-
-    sqlcmd -S "(local)\SQL2016" -U "sa" -P "Password12!" -i "Resonance.Core\content\ResonanceDB.MsSql.sql"
-    "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe" -u root --password=Password12! -e "CREATE USER resonance IDENTIFIED BY 'Password12!'; GRANT ALL ON *.* TO resonance;"
-    "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe" -u root --password=Password12! < Resonance.Core\content\ResonanceDB.MySql.sql
+    rem sqlcmd -S "(local)\SQL2016" -U "sa" -P "Password12!" -i "Resonance.Core\content\ResonanceDB.MsSql.sql"
+    rem "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe" -u root --password=Password12! -e "CREATE USER resonance IDENTIFIED BY 'Password12!'; GRANT ALL ON *.* TO resonance;"
+    rem "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe" -u root --password=Password12! < Resonance.Core\content\ResonanceDB.MySql.sql
 build_script:
 - cmd: |-
     dotnet build Resonance.Web -c Release
     dotnet build Resonance.APIClient -c Release
 test_script:
 - cmd: |-
-    dotnet test Resonance.Web.Tests -c Release
+    rem dotnet test Resonance.Web.Tests -c Release
     SET useMySql=true
-    dotnet test Resonance.Web.Tests -c Release
+    rem dotnet test Resonance.Web.Tests -c Release
