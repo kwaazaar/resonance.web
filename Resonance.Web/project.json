@@ -33,7 +33,8 @@
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
     "xmlDoc": true,
-    "optimize": true
+    "optimize": true,
+    "copyToOutput": { "includeFiles": [ "appsettings.json" ] }
   },
 
   "runtimeOptions": {
