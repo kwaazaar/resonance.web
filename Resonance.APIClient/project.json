@@ -6,7 +6,7 @@
   },
 
   "dependencies": {
-    "Resonance.Core": "0.6.9"
+    "Resonance.Core": "0.7.0"
   },
 
   "frameworks": {
@@ -17,7 +17,6 @@
     },
     "net452": {
       "dependencies": {
-        "System.Net.Http": "4.0.0"
       }
     }
   }
