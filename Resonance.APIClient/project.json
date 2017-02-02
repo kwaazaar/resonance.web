@@ -1,12 +1,12 @@
 {
-  "version": "0.7.0-*",
+  "version": "0.7.1",
 
   "buildOptions": {
     "outputName": "resonance.apiclient"
   },
 
   "dependencies": {
-    "Resonance.Core": "0.7.0"
+    "Resonance.Core": "0.7.1"
   },
 
   "frameworks": {
