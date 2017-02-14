@@ -15,7 +15,7 @@ before_test:
 build_script:
 - cmd: |-
     dotnet build Resonance.Web -c Release
-    dotnet build Resonance.APIClient -c Release
+    dotnet build Resonance.Web.Client -c Release
 test_script:
 - cmd: |-
     rem dotnet test Resonance.Web.Tests -c Release
