@@ -2,7 +2,7 @@
   "version": "0.7.1",
 
   "buildOptions": {
-    "outputName": "resonance.apiclient"
+    "outputName": "resonance.web.client"
   },
 
   "dependencies": {

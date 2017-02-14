@@ -48,21 +48,27 @@ namespace Resonance.Web
             services.AddSingleton<IConfiguration>(Configuration);
 
             // Configure IEventingRepoFactory dependency (reason: the repo that must be used in this app)
+            var dbType = Configuration["Resonance:Repo:Database:Type"];
+            var useMySql = (dbType == null || dbType.Equals("MySql", StringComparison.OrdinalIgnoreCase)); // Anything else than MySql is considered MsSql
             var maxRetriesOnDeadlock = int.Parse(Configuration["Resonance:Repo:Database:MaxRetriesOnDeadlock"]);
             var commandTimeout = TimeSpan.FromSeconds(int.Parse(Configuration["Resonance:Repo:Database:CommandTimeout"]));
-            
-            // To use MSSQLServer:
-            //var connectionString = Configuration.GetConnectionString("Resonance.MsSql");
-            //services.AddTransient<IEventingRepoFactory>((p) =>
-            //{
-            //  return new MsSqlEventingRepoFactory(connectionString, commandTimeout); // MsSqlEventingRepoFactory does not (yet) support maxRetriesOnDeadlock
-            //});
-            // To use MySQL:
-            var connectionString = Configuration.GetConnectionString("Resonance.MySql");
-            services.AddTransient<IEventingRepoFactory>((p) =>
+
+            if (useMySql)
             {
-                return new MySqlEventingRepoFactory(connectionString, commandTimeout, maxRetriesOnDeadlock);
-            });
+                var connectionString = Configuration.GetConnectionString("Resonance.MySql");
+                services.AddTransient<IEventingRepoFactory>((p) =>
+                {
+                    return new MySqlEventingRepoFactory(connectionString, commandTimeout, maxRetriesOnDeadlock);
+                });
+            }
+            else // MsSql
+            {
+                var connectionString = Configuration.GetConnectionString("Resonance.MsSql");
+                services.AddTransient<IEventingRepoFactory>((p) =>
+                {
+                    return new MsSqlEventingRepoFactory(connectionString, commandTimeout); // MsSqlEventingRepoFactory does not (yet) support maxRetriesOnDeadlock
+                });
+            }
 
             // Configure EventPublisher and EventConsumer
             services.AddTransient<IEventPublisherAsync, EventPublisher>();
