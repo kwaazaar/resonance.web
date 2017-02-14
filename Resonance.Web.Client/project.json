@@ -19,5 +19,20 @@
       "dependencies": {
       }
     }
+  },
+
+  "packOptions": {
+    "summary": "EventConsumer- and -Publisher implementation to communicate with Resonance.Web, the REST-api for the Resonance eventing library.",
+    "tags": [ "pub", "sub", "esb", "queue", "topic", "subscription", "microservice", "messaging", "event", "publish", "subscribe", "servicebus", "mssql", "mysql", "mariadb", "netcore", "api", "rest" ],
+    "owners": [ "Robert te Kaat" ],
+    "releaseNotes": "Initial release",
+    "iconUrl": "https://raw.githubusercontent.com/kwaazaar/Resonance/master/Resonance-Icon-64x64.png",
+    "projectUrl": "https://github.com/kwaazaar/resonance.web",
+    "licenseUrl": "https://raw.githubusercontent.com/kwaazaar/resonance.web/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/kwaazaar/resonance.web.git"
+    }
   }
 }
